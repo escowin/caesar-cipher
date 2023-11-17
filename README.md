@@ -1,2 +1,2 @@
 # caesar-cipher
-a substitution cipher
+Generates encrypted messages based on user input.
