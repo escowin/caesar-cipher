@@ -1,16 +1,19 @@
 // dom variables
 const html = {
-  headerEl: document.querySelector("h1"),
   copyrightEl: document.getElementById("copyright"),
+  formEl: document.getElementById("form"),
+  headerEl: document.querySelector("h1"),
 };
 
 // starts up app logic
-function init() {
-  credits(html);
+function init({formEl, ...htmlElements}) {
+  // credits(htmlElements);
 
   // Returns char strings from UTF-16 code units
   const x = String.fromCharCode(48, 57, 65, 90, 97, 122);
   console.log(x); // 0-9, A-Z, a-z
+
+  formEl.addEventListener("submit", formSubmitHandler)
 }
 
 // displays app details in the console & browser
@@ -30,4 +33,11 @@ function credits({ copyrightEl, headerEl }) {
   headerEl.innerText = `${info.app} ${info.v}`;
 }
 
-init();
+// captures user form-input
+function formSubmitHandler(e) {
+  e.preventDefault()
+  console.log("form submit")
+}
+
+
+init(html);
