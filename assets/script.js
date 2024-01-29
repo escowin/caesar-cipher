@@ -47,11 +47,8 @@ function formSubmitHandler(e) {
   e.preventDefault();
 
   // form elements
-  const num = dom.numInputEl.value;
-  const range = dom.rangeInputEl.value;
+  const num = parseInt(dom.numInputEl.value);
   const text = dom.textareaEl.value;
-
-  console.log(`${num}\n${range}\n${text}`);
 
   console.log(`original text: ${text}`);
   const result = encryptString(num, text);
@@ -63,22 +60,28 @@ function encryptString(num, string) {
   // ie.` 2, "hello"` will return "jgnnq"
   // case is maintained, therefore Z(90) + 1 will return A, ie "Zebra" returns "Afcsb"
 
-  let result = '';
+  let result = "";
   for (let i = 0; i < string.length; i++) {
     let charCode = string.charCodeAt(i);
-
-    // Encrypts uppercase letters
+    let encryptedCharCode = charCode + num;
+      console.log(num)
+      console.log("charCode: " + charCode);
+      console.log("encryptedCharCode: " + encryptedCharCode);
+      
+    // Encrypts uppercase & lowercase separately (non-alphabetic characters remain intact)
     if (charCode >= 65 && charCode <= 90) {
-      result += String.fromCharCode(((charCode - 65 + num) % 26) + 65);
+      if (encryptedCharCode > 90) {
+        encryptedCharCode -= 26; // Wrap around from 'Z' to 'A'
+      }
+
+    } else if (charCode >= 97 && charCode <= 122) {
+      if (encryptedCharCode > 122) {
+        encryptedCharCode -= 26; // Wrap around from 'z' to 'a'
+      }
+    } else {
+      encryptedCharCode = charCode;
     }
-    // Encrypts lowercase letters
-    else if (charCode >= 97 && charCode <= 122) {
-      result += String.fromCharCode(((charCode - 97 + num) % 26) + 97);
-    }
-    // Non-alphabetic characters remain unchanged
-    else {
-      result += string[i];
-    }
+    result += String.fromCharCode(encryptedCharCode);
   }
 
   // bug: A + 1 returns B, but Z + 1 returns R
