@@ -4,16 +4,22 @@ const dom = {
   formEl: document.getElementById("form"),
   headerEl: document.querySelector("h1"),
   numInputEl: document.getElementById("num-input"),
-  rangeInputEl: document.getElementById("num-range")
+  rangeInputEl: document.getElementById("num-range"),
+  textareaEl: document.getElementById("text")
 };
 
-// starts up app logic
-function init({formEl, numInputEl, rangeInputEl, ...html}) {
-  credits(html);
+// A-Z
+let uppercase = []
+for (let i = 65; i <= 90; i++) {
+  uppercase.push(String.fromCharCode(i))
+}
+console.log(uppercase) // prints array objects "A" - "Z"
 
-  // Returns char strings from UTF-16 code units
-  // const x = String.fromCharCode(48, 57, 65, 90, 97, 122);
-  // console.log(x); // 0-9, A-Z, a-z
+
+// starts up app logic
+function init() {
+  const { formEl, numInputEl, rangeInputEl, ...html} = dom
+  credits(html);
 
   numInputEl.addEventListener("input", syncedValues);
   rangeInputEl.addEventListener("input", syncedValues);
@@ -47,9 +53,23 @@ function syncedValues(e) {
 // captures user form-input
 function formSubmitHandler(e) {
   e.preventDefault()
-  console.log("form submit")
-  console.log(e.target.value)
+
+  // form elements
+  const num = dom.numInputEl.value;
+  const range = dom.rangeInputEl.value;
+  const text = dom.textareaEl.value;
+
+  console.log(`${num}\n${range}\n${text}`)
+
+  console.log(`original text: ${text}`)
+  const result = encryptString(num, text)
+  console.log(`encryption text: ${result}`)
 }
 
+function encryptString(num, string) {
+  // shift string value based on the num value in relation to the character value from char code for uppercase (65 - 90) and lowercase (97-122) characters
+  // ie.` 2, "hello"` will return "jgnnq"
+  // case is maintained, therefore Z(90) + 1 will return A, ie "Zebra" returns "Afcsb"
+}
 
-init(dom);
+init();
