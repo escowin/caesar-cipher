@@ -42,51 +42,37 @@ function syncedValues(e) {
   dom.numInputEl.value = value;
 }
 
-// captures user form-input
+// Captures user form-input
 function formSubmitHandler(e) {
   e.preventDefault();
 
-  // form elements
+  // form element `num` is converted from string to number type to accurately calculate math
   const num = parseInt(dom.numInputEl.value);
   const text = dom.textareaEl.value;
+  const result = encryptString(num, text);
 
   console.log(`original text: ${text}`);
-  const result = encryptString(num, text);
   console.log(`encryption text: ${result}`);
 }
 
+// Encrypts string by shifting each alphabetic character ASCII value to the right by `num` value
 function encryptString(num, string) {
-  // shift string value based on the num value in relation to the character value from char code for uppercase (65 - 90) and lowercase (97-122) characters
-  // ie.` 2, "hello"` will return "jgnnq"
-  // case is maintained, therefore Z(90) + 1 will return A, ie "Zebra" returns "Afcsb"
-
   let result = "";
   for (let i = 0; i < string.length; i++) {
     let charCode = string.charCodeAt(i);
-    let encryptedCharCode = charCode + num;
-      console.log(num)
-      console.log("charCode: " + charCode);
-      console.log("encryptedCharCode: " + encryptedCharCode);
-      
-    // Encrypts uppercase & lowercase separately (non-alphabetic characters remain intact)
-    if (charCode >= 65 && charCode <= 90) {
-      if (encryptedCharCode > 90) {
-        encryptedCharCode -= 26; // Wrap around from 'Z' to 'A'
-      }
+    let encryptedCode = charCode + num;
 
+    // Encrypts upper & lower cases separately, adjusting for wrap-arounds as needed
+    if (charCode >= 65 && charCode <= 90) {
+      encryptedCode = encryptedCode > 90 ? encryptedCode - 26 : encryptedCode;
     } else if (charCode >= 97 && charCode <= 122) {
-      if (encryptedCharCode > 122) {
-        encryptedCharCode -= 26; // Wrap around from 'z' to 'a'
-      }
+      encryptedCode = encryptedCode > 122 ? encryptedCode - 26 : encryptedCode;
     } else {
-      encryptedCharCode = charCode;
+      encryptedCode = charCode;
     }
-    result += String.fromCharCode(encryptedCharCode);
+    result += String.fromCharCode(encryptedCode);
   }
 
-  // bug: A + 1 returns B, but Z + 1 returns R
-  // original text: ABCDEFGHIJKLMNOPQRSTUVWXYZ, abcdefghijklmnopqrstuvwxyz
-  // encryption text: BLVFPZJTDNXHRBLVFPZJTDNXHR, blvfpzjtdnxhrblvfpzjtdnxhr
   return result;
 }
 
