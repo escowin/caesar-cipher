@@ -5,7 +5,8 @@ const dom = {
   headerEl: document.querySelector("h1"),
   numInputEl: document.getElementById("num-input"),
   rangeInputEl: document.getElementById("num-range"),
-  textareaEl: document.getElementById("text"),
+  originalTextEl: document.getElementById("original-text"),
+  encryptedTextEl: document.getElementById("encrypted-text")
 };
 
 // starts up app logic
@@ -48,11 +49,12 @@ function formSubmitHandler(e) {
 
   // form element `num` is converted from string to number type to accurately calculate math
   const num = parseInt(dom.numInputEl.value);
-  const text = dom.textareaEl.value;
+  const text = dom.originalTextEl.value;
   const result = encryptString(num, text);
 
   console.log(`original text: ${text}`);
   console.log(`encryption text: ${result}`);
+  displayEncryptedText(result)
 }
 
 // Encrypts string by shifting each alphabetic character ASCII value to the right by `num` value
@@ -74,6 +76,12 @@ function encryptString(num, string) {
   }
 
   return result;
+}
+
+function displayEncryptedText(string) {
+  // clears textarea before populating it with encrypted string
+  dom.encryptedTextEl.innerText = ""
+  dom.encryptedTextEl.innerText = string
 }
 
 init();
