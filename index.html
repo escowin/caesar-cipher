@@ -13,7 +13,14 @@
       <form id="form">
         <label for="num-range"
           >slider
-          <input id="num-range" type="range" min="1" max="25" value="1" />
+          <input
+            id="num-range"
+            type="range"
+            min="1"
+            max="25"
+            value="1"
+            class="input"
+          />
         </label>
         <label for="num-input"
           >num
@@ -24,18 +31,25 @@
             min="1"
             max="25"
             value="1"
+            class="input"
           />
         </label>
-        <label for="text">
+        <label for="original-text">
           Original text
-          <textarea id="original-text" name="text"></textarea>
+          <textarea id="original-text" name="text" class="input"></textarea>
         </label>
         <button type="submit">encrypt</button>
       </form>
     </header>
     <main id="cipher">
-      <label for="encrypted-text">Encrypted text
-        <textarea id="encrypted-text" name="encrypted-text"></textarea>
+      <label for="encrypted-text"
+        >Encrypted text
+        <textarea
+          id="encrypted-text"
+          name="encrypted-text"
+          class="input"
+          readonly
+        ></textarea>
       </label>
     </main>
     <footer><a id="copyright" target="_blank"></a></footer>

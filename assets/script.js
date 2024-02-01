@@ -6,7 +6,7 @@ const dom = {
   numInputEl: document.getElementById("num-input"),
   rangeInputEl: document.getElementById("num-range"),
   originalTextEl: document.getElementById("original-text"),
-  encryptedTextEl: document.getElementById("encrypted-text")
+  encryptedTextEl: document.getElementById("encrypted-text"),
 };
 
 // starts up app logic
@@ -25,7 +25,7 @@ function credits({ copyrightEl, headerEl }) {
   const info = {
     github: `https://github.com/escowin/`,
     app: "caesar-cipher",
-    v: "0.0.1",
+    v: "1.0.1",
     copyright: `\u00a9 ${date} Edwin M. Escobar`,
     link: () => info.github + info.app,
   };
@@ -33,7 +33,7 @@ function credits({ copyrightEl, headerEl }) {
   console.log(`${info.copyright}\n${info.link()}`);
   copyrightEl.setAttribute("href", info.link());
   copyrightEl.innerText = info.copyright;
-  headerEl.innerText = `${info.app} ${info.v}`;
+  headerEl.innerText = `${info.app.toUpperCase()} ${info.v}`;
 }
 
 // Syncs range & num input values
@@ -54,7 +54,7 @@ function formSubmitHandler(e) {
 
   console.log(`original text: ${text}`);
   console.log(`encryption text: ${result}`);
-  displayEncryptedText(result)
+  displayEncryptedText(result);
 }
 
 // Encrypts string by shifting each alphabetic character ASCII value to the right by `num` value
@@ -80,8 +80,8 @@ function encryptString(num, string) {
 
 function displayEncryptedText(string) {
   // clears textarea before populating it with encrypted string
-  dom.encryptedTextEl.innerText = ""
-  dom.encryptedTextEl.innerText = string
+  dom.encryptedTextEl.innerText = "";
+  dom.encryptedTextEl.innerText = string;
 }
 
 init();
