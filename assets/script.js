@@ -7,6 +7,7 @@ const dom = {
   rangeInputEl: document.getElementById("num-range"),
   originalTextEl: document.getElementById("original-text"),
   encryptedTextEl: document.getElementById("encrypted-text"),
+  copyBtn: document.getElementById("copy-btn"),
 };
 
 // starts up app logic
@@ -52,8 +53,6 @@ function formSubmitHandler(e) {
   const text = dom.originalTextEl.value;
   const result = encryptString(num, text);
 
-  console.log(`original text: ${text}`);
-  console.log(`encryption text: ${result}`);
   displayEncryptedText(result);
 }
 
@@ -84,4 +83,14 @@ function displayEncryptedText(string) {
   dom.encryptedTextEl.textContent = string;
 }
 
+function copyEncryptedText() {
+  const string = dom.encryptedTextEl.textContent;
+  try {
+    navigator.clipboard.writeText(string);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 init();
+dom.copyBtn.addEventListener("click", copyEncryptedText);
