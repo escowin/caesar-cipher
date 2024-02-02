@@ -2,7 +2,7 @@
 const dom = {
   copyrightEl: document.getElementById("copyright"),
   formEl: document.getElementById("form"),
-  headerEl: document.querySelector("h1"),
+  versionEl: document.getElementById("version"),
   numInputEl: document.getElementById("num-input"),
   rangeInputEl: document.getElementById("num-range"),
   originalTextEl: document.getElementById("original-text"),
@@ -20,7 +20,7 @@ function init() {
 }
 
 // displays app details in the console & browser
-function credits({ copyrightEl, headerEl }) {
+function credits({ copyrightEl, versionEl }) {
   const date = new Date().getFullYear();
   const info = {
     github: `https://github.com/escowin/`,
@@ -33,7 +33,7 @@ function credits({ copyrightEl, headerEl }) {
   console.log(`${info.copyright}\n${info.link()}`);
   copyrightEl.setAttribute("href", info.link());
   copyrightEl.innerText = info.copyright;
-  headerEl.innerText = `${info.app.toUpperCase()} ${info.v}`;
+  versionEl.innerText = `v${info.v}`;
 }
 
 // Syncs range & num input values
@@ -80,8 +80,8 @@ function encryptString(num, string) {
 
 function displayEncryptedText(string) {
   // clears textarea before populating it with encrypted string
-  dom.encryptedTextEl.innerText = "";
-  dom.encryptedTextEl.innerText = string;
+  dom.encryptedTextEl.textContent = "";
+  dom.encryptedTextEl.textContent = string;
 }
 
 init();

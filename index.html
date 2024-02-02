@@ -9,8 +9,12 @@
   </head>
   <body>
     <header>
-      <h1></h1>
+      <h1>caesar cipher <span id="version"></span></h1>
       <form id="form">
+        <label for="original-text" class="header">
+          Original text
+          <textarea id="original-text" name="text" class="input" rows="10"></textarea>
+        </label>
         <label for="num-range"
           >slider
           <input
@@ -34,15 +38,12 @@
             class="input"
           />
         </label>
-        <label for="original-text">
-          Original text
-          <textarea id="original-text" name="text" class="input"></textarea>
-        </label>
+
         <button type="submit">encrypt</button>
       </form>
     </header>
     <main id="cipher">
-      <label for="encrypted-text"
+      <label for="encrypted-text" class="header"
         >Encrypted text
         <textarea
           id="encrypted-text"
