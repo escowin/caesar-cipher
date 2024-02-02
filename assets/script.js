@@ -1,27 +1,31 @@
 // dom variables
 const dom = {
   copyrightEl: document.getElementById("copyright"),
-  formEl: document.getElementById("form"),
   versionEl: document.getElementById("version"),
-  numInputEl: document.getElementById("num-input"),
-  rangeInputEl: document.getElementById("num-range"),
-  originalTextEl: document.getElementById("original-text"),
-  encryptedTextEl: document.getElementById("encrypted-text"),
-  copyBtn: document.getElementById("copy-btn"),
-  encryptBtn: document.getElementById("encrypt-btn"),
-  clearBtn: document.getElementById("clear-btn"),
+  formEl: document.getElementById("form"),
+  input: {
+    numEl: document.getElementById("num-input"),
+    rangeEl: document.getElementById("num-range"),
+    originalTextEl: document.getElementById("original-text"),
+    encryptedTextEl: document.getElementById("encrypted-text"),
+  },
+  btn: {
+    copy: document.getElementById("copy-btn"),
+    encrypt: document.getElementById("encrypt-btn"),
+    clear: document.getElementById("clear-btn"),
+  },
 };
 
 // starts up app logic
 function init() {
-  const { formEl, numInputEl, rangeInputEl, copyBtn, clearBtn, ...html } = dom;
+  const { formEl, input, btn, ...html } = dom;
   credits(html);
 
-  numInputEl.addEventListener("input", syncedValues);
-  rangeInputEl.addEventListener("input", syncedValues);
+  input.numEl.addEventListener("input", syncedValues);
+  input.rangeEl.addEventListener("input", syncedValues);
   formEl.addEventListener("submit", (e) => formSubmitHandler(e));
-  clearBtn.addEventListener("click", (e) => clearOriginalText(e))
-  copyBtn.addEventListener("click", copyEncryptedText);
+  btn.clear.addEventListener("click", (e) => clearOriginalText(e));
+  btn.copy.addEventListener("click", copyEncryptedText);
 }
 
 // displays app details in the console & browser
@@ -44,8 +48,8 @@ function credits({ copyrightEl, versionEl }) {
 // Syncs range & num input values
 function syncedValues(e) {
   const value = e.target.value;
-  dom.rangeInputEl.value = value;
-  dom.numInputEl.value = value;
+  dom.input.rangeEl.value = value;
+  dom.input.numEl.value = value;
 }
 
 // Captures user form-input
@@ -53,8 +57,8 @@ function formSubmitHandler(e) {
   e.preventDefault();
 
   // form element `num` is converted from string to number type to accurately calculate math
-  const num = parseInt(dom.numInputEl.value);
-  const text = dom.originalTextEl.value;
+  const num = parseInt(dom.input.numEl.value);
+  const text = dom.input.originalTextEl.value;
   const result = encryptString(num, text);
 
   displayEncryptedText(result);
@@ -62,8 +66,8 @@ function formSubmitHandler(e) {
 
 // Clears the original text element of any existing text
 function clearOriginalText(e) {
-  e.preventDefault()
-  dom.originalTextEl.value = ""
+  e.preventDefault();
+  dom.input.originalTextEl.value = "";
 }
 
 // Encrypts string by shifting each alphabetic character ASCII value to the right by `num` value
@@ -89,20 +93,20 @@ function encryptString(num, string) {
 
 function displayEncryptedText(string) {
   // clears textarea before populating it with encrypted string
-  if (dom.copyBtn.innerText === "copied") {
-    dom.copyBtn.innerText = "copy"
+  if (dom.btn.copy.innerText === "copied") {
+    dom.btn.copy.innerText = "copy";
   }
 
-  dom.encryptedTextEl.textContent = "";
-  dom.encryptedTextEl.textContent = string;
+  dom.input.encryptedTextEl.textContent = "";
+  dom.input.encryptedTextEl.textContent = string;
 }
 
 function copyEncryptedText() {
-  const string = dom.encryptedTextEl.textContent;
+  const string = dom.input.encryptedTextEl.textContent;
 
   navigator.clipboard
     .writeText(string)
-    .then(() => dom.copyBtn.innerText = "copied")
+    .then(() => (dom.btn.copy.innerText = "copied"))
     .catch((err) => console.error(err));
 }
 
