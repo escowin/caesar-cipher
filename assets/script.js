@@ -8,16 +8,20 @@ const dom = {
   originalTextEl: document.getElementById("original-text"),
   encryptedTextEl: document.getElementById("encrypted-text"),
   copyBtn: document.getElementById("copy-btn"),
+  encryptBtn: document.getElementById("encrypt-btn"),
+  clearBtn: document.getElementById("clear-btn"),
 };
 
 // starts up app logic
 function init() {
-  const { formEl, numInputEl, rangeInputEl, ...html } = dom;
+  const { formEl, numInputEl, rangeInputEl, copyBtn, clearBtn, ...html } = dom;
   credits(html);
 
   numInputEl.addEventListener("input", syncedValues);
   rangeInputEl.addEventListener("input", syncedValues);
   formEl.addEventListener("submit", (e) => formSubmitHandler(e));
+  clearBtn.addEventListener("click", (e) => clearOriginalText(e))
+  copyBtn.addEventListener("click", copyEncryptedText);
 }
 
 // displays app details in the console & browser
@@ -26,7 +30,7 @@ function credits({ copyrightEl, versionEl }) {
   const info = {
     github: `https://github.com/escowin/`,
     app: "caesar-cipher",
-    v: "1.0.1",
+    v: "1.0.2",
     copyright: `\u00a9 ${date} Edwin M. Escobar`,
     link: () => info.github + info.app,
   };
@@ -56,6 +60,12 @@ function formSubmitHandler(e) {
   displayEncryptedText(result);
 }
 
+// Clears the original text element of any existing text
+function clearOriginalText(e) {
+  e.preventDefault()
+  dom.originalTextEl.value = ""
+}
+
 // Encrypts string by shifting each alphabetic character ASCII value to the right by `num` value
 function encryptString(num, string) {
   let result = "";
@@ -79,18 +89,21 @@ function encryptString(num, string) {
 
 function displayEncryptedText(string) {
   // clears textarea before populating it with encrypted string
+  if (dom.copyBtn.innerText === "copied") {
+    dom.copyBtn.innerText = "copy"
+  }
+
   dom.encryptedTextEl.textContent = "";
   dom.encryptedTextEl.textContent = string;
 }
 
 function copyEncryptedText() {
   const string = dom.encryptedTextEl.textContent;
-  try {
-    navigator.clipboard.writeText(string);
-  } catch (err) {
-    console.error(err);
-  }
+
+  navigator.clipboard
+    .writeText(string)
+    .then(() => dom.copyBtn.innerText = "copied")
+    .catch((err) => console.error(err));
 }
 
 init();
-dom.copyBtn.addEventListener("click", copyEncryptedText);
