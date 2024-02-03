@@ -39,9 +39,8 @@ function credits({ copyrightEl, versionEl }) {
     link: () => info.github + info.app,
   };
 
-  console.log(`${info.copyright}\n${info.link()}`);
-  copyrightEl.setAttribute("href", info.link());
-  copyrightEl.innerText = info.copyright;
+  console.log(`${info.app} v${info.v}\n${info.copyright}\n${info.link()}`);
+  copyrightEl.innerText = date;
   versionEl.innerText = `v${info.v}`;
 }
 

@@ -2,7 +2,6 @@
     --bg: rgb(179, 161, 140);
     --dark: rgb(58, 33, 20);
     --red: rgb(247, 83, 83);
-    /* textarea colors */
     --light: rgb(250, 242, 217);
     --unfocus: rgb(206, 174, 146);
     --tr-3: 1s color, 1s background-color, 1s box-shadow;
@@ -10,7 +9,6 @@
 }
 
 * {
-    /* outline: 1px dotted blue; */
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -48,7 +46,11 @@ body {
                 background-color: var(--dark);
                 margin: .25rem 0;
                 transition: 1s background-color, 1s box-shadow;
-                /* padding: .25rem 0; */
+
+                &:active {
+                    background-color: var(--red);
+                    box-shadow: var(--spread) .05rem var(--red);
+                }
 
                 &::-webkit-slider-thumb {
                     --size: .75rem;
@@ -68,10 +70,6 @@ body {
                     background-color: var(--light);
                 }
 
-                &:active {
-                    background-color: var(--red);
-                    box-shadow: var(--spread) .05rem var(--red);
-                }
             }
 
             & #num-input {
