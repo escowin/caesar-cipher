@@ -14,12 +14,15 @@ const dom = {
     encrypt: document.getElementById("encrypt-btn"),
     clear: document.getElementById("clear-btn"),
   },
+  alphabetOriginalEl: document.getElementById("alphabet-original"),
+  alphabetShiftedEl: document.getElementById("alphabet-shifted"),
 };
 
 // starts up app logic
 function init() {
   const { formEl, input, btn, ...html } = dom;
   credits(html);
+  displayLegend();
 
   input.numEl.addEventListener("input", syncedValues);
   input.rangeEl.addEventListener("input", syncedValues);
@@ -34,7 +37,7 @@ function credits({ copyrightEl, versionEl }) {
   const info = {
     github: `https://github.com/escowin/`,
     app: "caesar-cipher",
-    v: "1.0.2",
+    v: "1.0.3",
     copyright: `\u00a9 ${date} Edwin M. Escobar`,
     link: () => info.github + info.app,
   };
@@ -44,10 +47,32 @@ function credits({ copyrightEl, versionEl }) {
   versionEl.innerText = `v${info.v}`;
 }
 
+function displayLegend() {
+  // Clear existing content
+  dom.alphabetOriginalEl.innerHTML = "";
+  dom.alphabetShiftedEl.innerHTML = "";
+  // for loop will generate 25 <li> elements
+  // each <li> will have correspond with a uppercase letter
+  // ie. <li>A</li>, <li>B</li>, etc...
+  // these <li> elements will be appended to `alphabetOriginalEl`
+  for (let i = 65; i <= 90; i++) {
+    let charOriginal = String.fromCharCode(i);
+    let liOriginal = document.createElement("li");
+    liOriginal.textContent = charOriginal;
+    dom.alphabetOriginalEl.appendChild(liOriginal);
+
+    let num = parseInt(dom.input.numEl.value);
+    let charShifted = String.fromCharCode(((i - 65 + num) % 26) + 65);
+    let liShifted = document.createElement("li");
+    liShifted.textContent = charShifted;
+    dom.alphabetShiftedEl.appendChild(liShifted);
+  }
+}
 // Syncs range & num input values
 function syncedValues(e) {
   const value = e.target.value;
   dom.input.rangeEl.value = dom.input.numEl.value = value;
+  displayLegend();
 }
 
 // Captures user form-input
