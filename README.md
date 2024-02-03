@@ -7,6 +7,8 @@ A substitution cipher that shifts each letter in the plaintext by a user-defined
 
 I wrote this because I wanted to combine my interests in history, encryption, and computer science. Knowing that character strings can be represented by ASCII values, I applied basic programming principles to generate an encrypted string by capturing user input.
 
+Plans include expanding character sets to encompass numbers, symbols, accented letters, and non-Latin scripts for encryption while utilizing Progressive Web App features & IndexedDB for offline functionality & persistent memory storage.
+
 ## Table of Contents
 - [Usage](#usage)
 - [Features](#features)
@@ -29,10 +31,6 @@ To use the **caesar-cipher**, follow these steps:
 By following these steps, you can conveniently generate encrypted messages, copy them for further use, and clear the original text field for new input.
 
 ![mobile](./assets/img/caesar-cipher-sm.jpg)
-
-![tablet](./assets/img/caesar-cipher-md.jpg)
-
-![desktop](./assets/img/caesar-cipher-lg.jpg)
 
 ## Features
 - **Rule of Least Power Approach**: The application prioritizes HTML over CSS and CSS over JavaScript where applicable, following the principle of least power to keep the codebase simple and maintainable.
