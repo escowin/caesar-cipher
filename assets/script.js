@@ -48,8 +48,7 @@ function credits({ copyrightEl, versionEl }) {
 // Syncs range & num input values
 function syncedValues(e) {
   const value = e.target.value;
-  dom.input.rangeEl.value = value;
-  dom.input.numEl.value = value;
+  dom.input.rangeEl.value = dom.input.numEl.value = value;
 }
 
 // Captures user form-input
@@ -68,7 +67,6 @@ function formSubmitHandler(e) {
 function clearOriginalText(e) {
   e.preventDefault();
   dom.input.originalTextEl.value = "";
-  dom.btn.encrypt.innerText = "encrypt"
 }
 
 // Encrypts string by shifting each alphabetic character ASCII value to the right by `num` value
@@ -93,14 +91,9 @@ function encryptString(num, string) {
 }
 
 function displayEncryptedText(string) {
-  const { btn, input } = dom 
-  // clears textarea before populating it with encrypted string
-  if (btn.copy.innerText === "copied") {
-    btn.copy.innerText = "copy";
-  }
-  
-
-  input.encryptedTextEl.textContent = "";
+  const { btn, input } = dom;
+  // Shows new encrypted string has yet to be copied
+  if (btn.copy.innerText === "copied") btn.copy.innerText = "copy";
   input.encryptedTextEl.textContent = string;
 }
 
