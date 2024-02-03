@@ -68,6 +68,7 @@ function formSubmitHandler(e) {
 function clearOriginalText(e) {
   e.preventDefault();
   dom.input.originalTextEl.value = "";
+  dom.btn.encrypt.innerText = "encrypt"
 }
 
 // Encrypts string by shifting each alphabetic character ASCII value to the right by `num` value
@@ -92,13 +93,15 @@ function encryptString(num, string) {
 }
 
 function displayEncryptedText(string) {
+  const { btn, input } = dom 
   // clears textarea before populating it with encrypted string
-  if (dom.btn.copy.innerText === "copied") {
-    dom.btn.copy.innerText = "copy";
+  if (btn.copy.innerText === "copied") {
+    btn.copy.innerText = "copy";
   }
+  
 
-  dom.input.encryptedTextEl.textContent = "";
-  dom.input.encryptedTextEl.textContent = string;
+  input.encryptedTextEl.textContent = "";
+  input.encryptedTextEl.textContent = string;
 }
 
 function copyEncryptedText() {
