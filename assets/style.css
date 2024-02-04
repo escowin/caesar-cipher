@@ -1,9 +1,12 @@
+/* Design philosophy : Rule of thirds styled big to small, selectors alphabetically listed. */
+
+/* I. Palette */
 :root {
-    --bg: rgb(179, 161, 140);
+    --bg: rgb(107, 93, 76);
+    --bg-unfocus: rgba(104, 74, 48, 0.644);
     --dark: rgb(58, 33, 20);
-    --red: rgb(247, 83, 83);
     --light: rgb(250, 242, 217);
-    --unfocus: rgb(206, 174, 146);
+    --red: rgb(247, 83, 83);
     --tr-3: 1s color, 1s background-color, 1s box-shadow;
     --spread: 0 0 .5rem;
 }
@@ -14,9 +17,10 @@
     padding: 0;
 }
 
+/* I. Base */
 body {
     background-color: var(--bg);
-    box-shadow: inset 0 0 1.5rem var(--dark);
+    box-shadow: inset 0 0 2rem var(--dark);
     color: var(--dark);
     font-family: 'Times New Roman', Times, serif;
     display: flex;
@@ -24,123 +28,93 @@ body {
     gap: .5rem;
     white-space: pre-line;
     height: 100vh;
+}
 
-    & header {
-        display: flex;
-        flex-direction: column;
+/* II. Semantic divisions */
+footer,
+header,
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
 
-        & h1 {
-            font-variant: small-caps;
-            padding: .5rem .5rem 0 .5rem;
+/* III. Nested division specificity */
+/* - Header */
+h1 {
+    font-variant: small-caps;
+    padding: .5rem .5rem 0 .5rem;
+    color: var(--red);
+    text-shadow: .25rem .25rem 1rem var(--dark);
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    & .char-list {
+        display: grid;
+        grid-template-columns: repeat(26, 1fr);
+        text-align: center;
+        background-color: var(--dark);
+        color: var(--light);
+        list-style: none;
+
+        & li {
+            outline: 1px dotted var(--bg);
+            padding: .25rem 0;
+
         }
 
-        & nav {
-            display: flex;
-            flex-direction: column;
-
-            & .char-list {
-                display: grid;
-                grid-template-columns: repeat(26, 1fr);
-                text-align: center;
-                background-color: var(--dark);
-                color: var(--light);
-                padding: .25rem 0;
-                list-style: none;
-            }
-
-            & #alphabet-shifted {
-                color: var(--red);
-                outline: 1px solid var(--red);
-            }
-
-            & #form {
-                display: grid;
-                grid-template-columns: 1fr auto auto auto;
-                gap: .5rem;
-                padding: 0 1rem;
-                align-items: flex-end;
-                margin-top: .5rem;
-
-                & label {
-                    gap: .25rem;
-                }
-
-                /* customize range slider & thumb appearance */
-                & #num-range {
-                    appearance: none;
-                    background-color: var(--dark);
-                    margin: .25rem 0;
-                    transition: 1s background-color, 1s box-shadow;
-
-                    &:active {
-                        background-color: var(--red);
-                        box-shadow: var(--spread) .05rem var(--red);
-                    }
-
-                    &::-webkit-slider-thumb {
-                        --size: .75rem;
-                        -webkit-appearance: none;
-                        appearance: none;
-                        width: var(--size);
-                        height: var(--size);
-                        border-radius: 50%;
-                        background: var(--red);
-                        box-shadow: 0 0 1rem var(--red);
-                        outline: none;
-                        padding: .5rem;
-                        transition: 1s background-color;
-                    }
-
-                    &::-webkit-slider-thumb:active {
-                        background-color: var(--light);
-                    }
-
-                }
-
-                & #num-input {
-                    padding: .25rem;
-                    transition: var(--tr-3);
-                    width: 2.5rem;
-
-                    &:focus {
-                        color: var(--light);
-                        background-color: var(--red);
-                        box-shadow: var(--spread) .25rem var(--red);
-                    }
-                }
-            }
-        }
     }
 
-    & main {
-        display: flex;
-        flex-direction: column;
-        flex-grow: 2;
-        gap: 1rem;
-        padding: 0 1.5rem;
+    & #alphabet-shifted {
+        color: var(--red);
+        /* outline: 1px solid var(--red); */
+    }
+
+    & #cipher-form {
+        display: grid;
+        grid-template-columns: 1fr auto auto auto;
+        gap: .5rem;
+        padding: 0 1rem;
+        align-items: flex-end;
+        margin-top: .5rem;
 
         & label {
-            gap: .7rem;
+            gap: .25rem;
         }
+    }
+}
+
+/* - Main */
+main {
+    flex-grow: 2;
+    gap: 1rem;
+    padding: 0 1.5rem;
+
+    & label {
+        gap: .7rem;
+        width: 100%;
+    }
+
+    & label[for="encrypted-text"] {
+        flex-grow: 1;
 
         & #original-text {
             height: 10rem;
         }
 
-        & label[for="encrypted-text"] {
-            flex-grow: 1;
-
-            & #encrypted-text {
-                height: 100%;
-            }
+        & #encrypted-text {
+            height: 100%;
         }
-    }
-
-    & footer {
-        text-align: center;
     }
 }
 
+/* IV. Interactive */
+/* Links */
 a {
     color: inherit;
     text-decoration: none;
@@ -149,38 +123,27 @@ a {
     background-color: none;
     transition: var(--tr-3);
 
+    &:focus {
+        outline: none;
+        color: var(--red);
+        background-color: var(--dark);
+        box-shadow: 0 0 .25rem .25rem var(--dark);
+    }
+
     &:hover {
         color: var(--red);
     }
-
-    &:focus {
-        outline: none;
-        background-color: var(--dark);
-        box-shadow: 0 0 .25rem .25rem var(--dark);
-        color: var(--red);
-    }
 }
 
-label {
-    display: flex;
-    flex-direction: column;
-    font-weight: bold;
-    font-variant: small-caps;
-}
-
-input {
-    color: var(--red);
-    background-color: var(--dark);
-    box-shadow: var(--spread) var(--dark);
-}
-
-.input,
-button {
+/* Logic entry points */
+button,
+.input {
     border-radius: .5rem;
     outline: none;
     border: none;
 }
 
+/* Buttons */
 button {
     padding: .3rem .75rem;
     font-variant: small-caps;
@@ -189,67 +152,123 @@ button {
     box-shadow: var(--spread) var(--dark);
     transition: var(--tr-3);
 
-    &:focus {
-        background-color: var(--red);
-        color: var(--dark);
-        box-shadow: var(--spread) .25rem var(--red);
-    }
-
     &:active {
         color: var(--light);
+    }
+
+    &:focus {
+        color: var(--dark);
+        background-color: var(--red);
+        box-shadow: var(--spread) .25rem var(--red);
+    }
+}
+
+/* Labels */
+label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    font-variant: small-caps;
+}
+
+/* Inputs */
+input {
+    color: var(--red);
+    background-color: var(--dark);
+    box-shadow: var(--spread) var(--dark);
+}
+
+input[type="number"] {
+    padding: .25rem;
+    transition: var(--tr-3);
+    width: 2.5rem;
+
+    &:focus {
+        color: var(--light);
+        background-color: var(--red);
+        box-shadow: var(--spread) .25rem var(--red);
+    }
+}
+
+input[type="range"] {
+    appearance: none;
+    background-color: var(--dark);
+    margin: .25rem 0;
+    transition: 1s background-color, 1s box-shadow;
+
+    &:active {
+        background-color: var(--red);
+        box-shadow: var(--spread) .05rem var(--red);
+    }
+
+    &::-webkit-slider-thumb {
+        --size: .75rem;
+        -webkit-appearance: none;
+        appearance: none;
+        width: var(--size);
+        height: var(--size);
+        border-radius: 50%;
+        background: var(--red);
+        box-shadow: 0 0 1rem var(--red);
+        outline: none;
+        padding: .5rem;
+        transition: 1s background-color;
+    }
+
+    &::-webkit-slider-thumb:active {
+        background-color: var(--light);
     }
 }
 
 textarea {
-    background-color: var(--unfocus);
-    box-shadow: var(--spread) .5rem var(--unfocus);
+    background-color: var(--bg-unfocus);
+    box-shadow: var(--spread) .5rem var(--bg-unfocus);
     resize: none;
     white-space: pre-line;
-    border: none;
     padding: .5rem;
     transition: 1s background-color, 1s box-shadow;
 
-    &:focus {
+    &:focus,
+    &:hover {
         background-color: var(--light);
         box-shadow: var(--spread) .5rem var(--light);
     }
-
 }
 
 
 @media screen and (min-width: 1024px) {
     body {
-
         gap: 2rem;
+    }
 
-        & header #form {
-            grid-template-rows: 1fr max-content;
-            height: 100%;
-            gap: 1.5rem .5rem;
+    /* header */
+    #cipher-form {
+        grid-template-rows: 1fr max-content;
+        height: 100%;
+        gap: 1.5rem .5rem;
 
-            & label[for="original-text"] {
-                height: inherit;
+        & label[for="original-text"] {
+            height: inherit;
 
-                & #original-text {
-                    flex-grow: 1;
-                }
+            & #original-text {
+                flex-grow: 1;
             }
         }
+    }
 
-        & main {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr max-content;
-            padding-top: 3.25rem;
-            gap: 3.25rem;
+    main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr max-content;
+        padding-top: 3.25rem;
+        gap: 3.25rem;
 
-            & #copy-btn {
-                align-self: flex-end;
-            }
+        & #copy-btn {
+            align-self: flex-end;
         }
+    }
 
-        & footer {
-            grid-column: 1 / -1;
-        }
+    footer {
+        grid-column: 1 / -1;
     }
 }
