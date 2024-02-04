@@ -21,6 +21,11 @@ const dom = {
 // starts up app logic
 function init() {
   const { formEl, input, btn, ...html } = dom;
+  const events = {
+    engaged: ["mousedown", "touchstart", "focus", "keydown"],
+    disengaged: ["mouseup", "touchend", "blur"],
+  };
+
   credits(html);
   displayLegend();
 
@@ -30,22 +35,16 @@ function init() {
   btn.clear.addEventListener("click", (e) => clearOriginalText(e));
   btn.copy.addEventListener("click", copyEncryptedText);
 
-  // Encrypted legend lights & dims when user interacts with range & num inputs
-  input.numEl.addEventListener("mousedown", lightupLegend);
-  input.numEl.addEventListener("touchstart", lightupLegend);
-  input.numEl.addEventListener("focus", lightupLegend);
-  
-  input.rangeEl.addEventListener("mousedown", lightupLegend);
-  input.rangeEl.addEventListener("touchstart", lightupLegend);
-  input.rangeEl.addEventListener("focus", lightupLegend);
+  // Encrypted legend lights & dims when user interacts with input fields
+  legendEventListeners(input.numEl, events.engaged, lightup);
+  legendEventListeners(input.rangeEl, events.engaged, lightup);
+  legendEventListeners(input.originalTextEl, ["focus"], lightup);
+  legendEventListeners(input.encryptedTextEl, ["focus"], lightup);
 
-  input.numEl.addEventListener("mouseup", dimLegend);
-  input.numEl.addEventListener("touchend", dimLegend);
-  input.numEl.addEventListener("blur", dimLegend);
-
-  input.rangeEl.addEventListener("mouseup", dimLegend);
-  input.rangeEl.addEventListener("touchend", dimLegend);
-  input.rangeEl.addEventListener("blur", dimLegend);
+  legendEventListeners(input.numEl, events.disengaged, dim);
+  legendEventListeners(input.rangeEl, [...events.disengaged, "keyup"], dim);
+  legendEventListeners(input.originalTextEl, ["blur"], dim);
+  legendEventListeners(input.encryptedTextEl, ["blur"], dim);
 }
 
 // displays app details in the console & browser
@@ -64,27 +63,6 @@ function credits({ copyrightEl, versionEl }) {
   versionEl.innerText = `v${info.v}`;
 }
 
-function displayLegend() {
-  // Clear existing content
-  dom.alphabetOriginalEl.innerHTML = "";
-  dom.alphabetShiftedEl.innerHTML = "";
-  // for loop will generate 25 <li> elements
-  // each <li> will have correspond with a uppercase letter
-  // ie. <li>A</li>, <li>B</li>, etc...
-  // these <li> elements will be appended to `alphabetOriginalEl`
-  for (let i = 65; i <= 90; i++) {
-    let charOriginal = String.fromCharCode(i);
-    let liOriginal = document.createElement("li");
-    liOriginal.textContent = charOriginal;
-    dom.alphabetOriginalEl.appendChild(liOriginal);
-
-    let num = parseInt(dom.input.numEl.value);
-    let charShifted = String.fromCharCode(((i - 65 + num) % 26) + 65);
-    let liShifted = document.createElement("li");
-    liShifted.textContent = charShifted;
-    dom.alphabetShiftedEl.appendChild(liShifted);
-  }
-}
 // Syncs range & num input values
 function syncedValues(e) {
   const value = e.target.value;
@@ -92,11 +70,41 @@ function syncedValues(e) {
   displayLegend();
 }
 
-function lightupLegend() {
+// Displays two alphabetic legend to communicate substitution encryption process
+function displayLegend() {
+  // Clears existing content
+  dom.alphabetOriginalEl.innerHTML = "";
+  dom.alphabetShiftedEl.innerHTML = "";
+
+  // Dynamically generates A-Z list elements
+  for (let i = 65; i <= 90; i++) {
+    // Static legend
+    let charOriginal = String.fromCharCode(i);
+    let liOriginal = document.createElement("li");
+    liOriginal.textContent = charOriginal;
+    dom.alphabetOriginalEl.appendChild(liOriginal);
+
+    // Shifting legend
+    let num = parseInt(dom.input.numEl.value);
+    let charShifted = String.fromCharCode(((i - 65 + num) % 26) + 65);
+    let liShifted = document.createElement("li");
+    liShifted.textContent = charShifted;
+    dom.alphabetShiftedEl.appendChild(liShifted);
+  }
+}
+
+// User interaction with input elements affect appearance of encrypted legend
+function legendEventListeners(inputEl, events, handler) {
+  events.forEach((event) => inputEl.addEventListener(event, handler));
+}
+
+// Lights up encrypted legend
+function lightup() {
   dom.alphabetShiftedEl.style.backgroundColor = "var(--light)";
 }
 
-function dimLegend() {
+// Dims the encrypted legend
+function dim() {
   dom.alphabetShiftedEl.style.backgroundColor = "var(--bg-unfocus)";
 }
 
@@ -139,13 +147,15 @@ function encryptString(num, string) {
   return result;
 }
 
+// Displays generated encrypted text in browser
 function displayEncryptedText(string) {
   const { btn, input } = dom;
-  // Shows new encrypted string has yet to be copied
+  // Communicates that the newly encrypted string has yet to be copied
   if (btn.copy.innerText === "copied") btn.copy.innerText = "copy";
   input.encryptedTextEl.textContent = string;
 }
 
+// Copies encrypted text string to clipboard
 function copyEncryptedText() {
   const string = dom.input.encryptedTextEl.textContent;
 
