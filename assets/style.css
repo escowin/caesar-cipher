@@ -46,6 +46,10 @@ main {
 h1 {
     font-variant: small-caps;
     padding: .5rem;
+
+    & #version {
+        font-size: smaller;
+    }
 }
 
 nav {
@@ -69,12 +73,12 @@ nav {
 
     }
 
-    & #alphabet-original {
+    & #static-legend {
         color: var(--light);
         text-shadow: var(--spread) var(--dark);
     }
 
-    & #alphabet-shifted {
+    & #encrypted-legend {
         color: var(--red);
         transition: 1s background-color;
     }

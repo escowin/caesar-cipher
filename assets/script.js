@@ -14,8 +14,8 @@ const dom = {
     encrypt: document.getElementById("encrypt-btn"),
     clear: document.getElementById("clear-btn"),
   },
-  alphabetOriginalEl: document.getElementById("alphabet-original"),
-  alphabetShiftedEl: document.getElementById("alphabet-shifted"),
+  staticLegendEl: document.getElementById("static-legend"),
+  encryptedLegendEl: document.getElementById("encrypted-legend"),
 };
 
 // Start up displays cipher information & listen for user interactions
@@ -53,7 +53,7 @@ function credits({ copyrightEl, versionEl }) {
   const info = {
     github: `https://github.com/escowin/`,
     app: "caesar-cipher",
-    v: "1.0.3",
+    v: "1.0.5",
     copyright: `\u00a9 ${date} Edwin M. Escobar`,
     link: () => info.github + info.app,
   };
@@ -73,8 +73,8 @@ function syncedValues(e) {
 // Displays two alphabetic legend to communicate substitution encryption process
 function displayLegend() {
   // Clears existing content
-  dom.alphabetOriginalEl.innerHTML = "";
-  dom.alphabetShiftedEl.innerHTML = "";
+  dom.staticLegendEl.innerHTML = "";
+  dom.encryptedLegendEl.innerHTML = "";
 
   // Dynamically generates A-Z list elements
   for (let i = 65; i <= 90; i++) {
@@ -82,14 +82,14 @@ function displayLegend() {
     let charOriginal = String.fromCharCode(i);
     let liOriginal = document.createElement("li");
     liOriginal.textContent = charOriginal;
-    dom.alphabetOriginalEl.appendChild(liOriginal);
+    dom.staticLegendEl.appendChild(liOriginal);
 
-    // Shifting legend
+    // Encrypted legend synced range/num input value
     let num = parseInt(dom.input.numEl.value);
     let charShifted = String.fromCharCode(((i - 65 + num) % 26) + 65);
     let liShifted = document.createElement("li");
     liShifted.textContent = charShifted;
-    dom.alphabetShiftedEl.appendChild(liShifted);
+    dom.encryptedLegendEl.appendChild(liShifted);
   }
 }
 
@@ -99,8 +99,8 @@ function legendEventListeners(inputEl, events, handler) {
     inputEl.addEventListener(event, () => {
       // Determines whether to light up or dim the encrypted legend
       handler
-        ? (dom.alphabetShiftedEl.style.backgroundColor = "var(--light)")
-        : (dom.alphabetShiftedEl.style.backgroundColor = "var(--bg-unfocus)");
+        ? (dom.encryptedLegendEl.style.backgroundColor = "var(--light)")
+        : (dom.encryptedLegendEl.style.backgroundColor = "var(--bg-unfocus)");
     })
   );
 }
