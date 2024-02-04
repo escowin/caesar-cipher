@@ -5,7 +5,10 @@
 
 A substitution cipher that shifts each letter in the plaintext by a user-defined number of positions down the alphabet. The result is a basic encrypted message that the user can easily copy with a click of a button.
 
-I wrote this because I wanted to combine my interests in history, encryption, and computer science. Knowing that character strings can be represented by ASCII values, I applied basic programming principles to generate an encrypted string by capturing user input.
+I wrote this because I wanted to combine my interests in encryption history, computer science & narrative. 
+
+Knowing that character strings can be represented by ASCII values, I applied basic programming principles to generate an encrypted string by capturing user input. Leveraged CSS pseudo classes with color theory to visually obscure un-focused elements.
+
 
 ## Table of Contents
 - [Usage](#usage)
@@ -31,8 +34,6 @@ By following these steps, you can conveniently generate encrypted messages, copy
 ![mobile](./assets/img/caesar-cipher-sm.jpg)
 
 ![tablet](./assets/img/caesar-cipher-md.jpg)
-
-![desktop](./assets/img/caesar-cipher-lg.jpg)
 
 ## Features
 - **Rule of Least Power Approach**: The application prioritizes HTML over CSS and CSS over JavaScript where applicable, following the principle of least power to keep the codebase simple and maintainable.

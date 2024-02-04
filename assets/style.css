@@ -196,11 +196,13 @@ input[type="number"] {
     padding: .25rem;
     transition: var(--tr-3);
     width: 2.5rem;
+    background-color: var(--bg-unfocus);
+    box-shadow: inset var(--spread) var(--dark);
+    text-align: center;
+    text-shadow: var(--tr-3) var(--dark);
 
     &:focus {
-        color: var(--light);
-        background-color: var(--red);
-        box-shadow: var(--spread) .25rem var(--red);
+        color: var(--red);
     }
 }
 
