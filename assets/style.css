@@ -75,6 +75,7 @@ nav {
 
     & #alphabet-shifted {
         color: var(--red);
+        transition: 1s background-color;
     }
 
     & #cipher-form {
@@ -122,22 +123,28 @@ a {
     font-weight: bold;
     border-radius: .5rem;
     padding: .5rem 1rem;
-    margin: .5rem;
+    margin: 1rem 0;
     background-color: none;
-    transition: var(--tr-3), 1s text-shadow;
+    transition: var(--tr-3), 1s text-shadow, 1s outline;
     text-shadow: var(--spread) var(--dark);
     box-shadow: none;
 
-
-    &:focus {
-        outline: none;
-        color: var(--light);
-        background-color: var(--dark);
-    }
-
+    &:focus,
     &:hover {
         color: var(--light);
     }
+
+    &:focus {
+        outline: 2px solid var(--light);
+        background-color: var(--red);
+        box-shadow: var(--spread) var(--light);
+    }
+
+    &:hover {
+        background-color: var(--dark);
+        box-shadow: var(--spread) var(--dark);
+    }
+
 }
 
 /* Logic entry points */
@@ -146,6 +153,7 @@ button,
     border-radius: .5rem;
     outline: none;
     border: none;
+    transition: var(--spread), 1s outline;
 }
 
 /* Buttons */
@@ -154,7 +162,6 @@ button {
     font-variant: small-caps;
     background-color: var(--dark);
     box-shadow: var(--spread) var(--dark);
-    transition: var(--tr-3);
 
     &:active {
         color: var(--light);
@@ -164,6 +171,7 @@ button {
         color: var(--light);
         background-color: var(--red);
         box-shadow: var(--spread) var(--light);
+        outline: 2px solid var(--light);
     }
 }
 
@@ -186,6 +194,19 @@ label {
 }
 
 /* Inputs */
+.input {
+    transition: var(--tr-3), 1s text-shadow, 1s outline;
+
+    &:focus,
+    &:hover {
+        background-color: var(--light);
+    }
+
+    &:focus {
+        outline: 2px solid var(--dark);
+    }
+}
+
 input {
     color: var(--red);
     background-color: var(--dark);
@@ -194,7 +215,6 @@ input {
 
 input[type="number"] {
     padding: .25rem;
-    transition: var(--tr-3);
     width: 2.5rem;
     background-color: var(--bg-unfocus);
     box-shadow: inset var(--spread) var(--dark);
@@ -211,7 +231,6 @@ input[type="range"] {
     background-color: var(--bg-unfocus);
     margin: .25rem 0;
     box-shadow: inset var(--spread) var(--dark);
-    transition: 1s background-color, 1s box-shadow;
 
     &:active {
         background-color: var(--light);
@@ -233,8 +252,6 @@ input[type="range"] {
 
     &::-webkit-slider-thumb:active {
         background-color: var(--dark);
-        box-shadow: var(--red) var(--red);
-
     }
 }
 
@@ -242,19 +259,17 @@ textarea {
     color: var(--bg-unfocus);
     background-color: var(--bg-unfocus);
     box-shadow: inset var(--spread) var(--dark);
+    text-shadow: 0 0 .05rem 5rem var(--dark);
+    font-size: 2rem;
     min-height: 10rem;
     resize: none;
-    white-space: pre-line;
     padding: .5rem;
-    text-shadow: 0 0 .05rem 5rem var(--dark);
-    transition: var(--tr-3), 1s text-shadow;
+    white-space: pre-line;
 
     &:focus,
     &:hover {
         color: var(--dark);
-        background-color: var(--light);
         text-shadow: var(--spread) var(--dark);
-        box-shadow: none;
     }
 
     &::-webkit-scrollbar {
@@ -264,7 +279,6 @@ textarea {
     &::-webkit-scrollbar-thumb {
         background-color: var(--bg);
         border-radius: 1rem;
-
     }
 
 }
@@ -298,13 +312,14 @@ textarea {
 
         & label {
             height: 100%;
+
             & textarea {
                 flex-grow: 1;
             }
         }
 
         & #copy-btn {
-            grid-column:  2 / -1;
+            grid-column: 2 / -1;
             justify-self: flex-end;
         }
     }
