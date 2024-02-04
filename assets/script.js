@@ -1,4 +1,4 @@
-// dom variables
+// DOM variables
 const dom = {
   copyrightEl: document.getElementById("copyright"),
   versionEl: document.getElementById("version"),
@@ -18,7 +18,7 @@ const dom = {
   alphabetShiftedEl: document.getElementById("alphabet-shifted"),
 };
 
-// starts up app logic
+// Start up displays cipher information & listen for user interactions
 function init() {
   const { formEl, input, btn, ...html } = dom;
   const events = {
@@ -36,18 +36,18 @@ function init() {
   btn.copy.addEventListener("click", copyEncryptedText);
 
   // Encrypted legend lights & dims when user interacts with input fields
-  legendEventListeners(input.numEl, events.engaged, lightup);
-  legendEventListeners(input.rangeEl, events.engaged, lightup);
-  legendEventListeners(input.originalTextEl, ["focus"], lightup);
-  legendEventListeners(input.encryptedTextEl, ["focus"], lightup);
+  legendEventListeners(input.numEl, events.engaged, true);
+  legendEventListeners(input.rangeEl, events.engaged, true);
+  legendEventListeners(input.originalTextEl, ["focus"], true);
+  legendEventListeners(input.encryptedTextEl, ["focus"], true);
 
-  legendEventListeners(input.numEl, events.disengaged, dim);
-  legendEventListeners(input.rangeEl, [...events.disengaged, "keyup"], dim);
-  legendEventListeners(input.originalTextEl, ["blur"], dim);
-  legendEventListeners(input.encryptedTextEl, ["blur"], dim);
+  legendEventListeners(input.numEl, events.disengaged, false);
+  legendEventListeners(input.rangeEl, [...events.disengaged, "keyup"], false);
+  legendEventListeners(input.originalTextEl, ["blur"], false);
+  legendEventListeners(input.encryptedTextEl, ["blur"], false);
 }
 
-// displays app details in the console & browser
+// Displays app details in the console & browser
 function credits({ copyrightEl, versionEl }) {
   const date = new Date().getFullYear();
   const info = {
@@ -95,24 +95,21 @@ function displayLegend() {
 
 // User interaction with input elements affect appearance of encrypted legend
 function legendEventListeners(inputEl, events, handler) {
-  events.forEach((event) => inputEl.addEventListener(event, handler));
-}
-
-// Lights up encrypted legend
-function lightup() {
-  dom.alphabetShiftedEl.style.backgroundColor = "var(--light)";
-}
-
-// Dims the encrypted legend
-function dim() {
-  dom.alphabetShiftedEl.style.backgroundColor = "var(--bg-unfocus)";
+  events.forEach((event) =>
+    inputEl.addEventListener(event, () => {
+      // Determines whether to light up or dim the encrypted legend
+      handler
+        ? (dom.alphabetShiftedEl.style.backgroundColor = "var(--light)")
+        : (dom.alphabetShiftedEl.style.backgroundColor = "var(--bg-unfocus)");
+    })
+  );
 }
 
 // Captures user form-input
 function formSubmitHandler(e) {
   e.preventDefault();
 
-  // form element `num` is converted from string to number type to accurately calculate math
+  // Converts `numEl` value type to accurately perform math
   const num = parseInt(dom.input.numEl.value);
   const text = dom.input.originalTextEl.value;
   const result = encryptString(num, text);
@@ -124,6 +121,7 @@ function formSubmitHandler(e) {
 function clearOriginalText(e) {
   e.preventDefault();
   dom.input.originalTextEl.value = "";
+  dom.input.encryptedTextEl.innerText = "";
 }
 
 // Encrypts string by shifting each alphabetic character ASCII value to the right by `num` value
