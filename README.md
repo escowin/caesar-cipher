@@ -5,7 +5,10 @@
 
 A substitution cipher that shifts each letter in the plaintext by a user-defined number of positions down the alphabet. The result is a basic encrypted message that the user can easily copy with a click of a button.
 
-I wrote this because I wanted to combine my interests in history, encryption, and computer science. Knowing that character strings can be represented by ASCII values, I applied basic programming principles to generate an encrypted string by capturing user input.
+I wrote this because I wanted to combine my interests in encryption history, computer science & narrative. 
+
+Knowing that character strings can be represented by ASCII values, I applied basic programming principles to generate an encrypted string by capturing user input. Leveraged CSS pseudo classes with color theory to visually obscure un-focused elements.
+
 
 Plans include expanding character sets to encompass numbers, symbols, accented letters, and non-Latin scripts for encryption while utilizing Progressive Web App features & IndexedDB for offline functionality & persistent memory storage.
 

@@ -9,12 +9,12 @@
   </head>
   <body>
     <header>
-      <h1>caesar cipher <span id="version"></span></h1>
+      <h1 class="label">caesar cipher <span id="version"></span></h1>
       <nav>
         <ol class="char-list" id="alphabet-original"></ol>
         <ol class="char-list" id="alphabet-shifted"></ol>
-        <form id="form">
-          <label for="num-range"
+        <form id="cipher-form">
+          <label for="num-range" class="label"
             >slider
             <input
               id="num-range"
@@ -25,7 +25,7 @@
               class="input"
             />
           </label>
-          <label for="num-input"
+          <label for="num-input" class="label"
             >num
             <input
               id="num-input"
@@ -38,13 +38,13 @@
             />
           </label>
 
-          <button type="submit" id="encrypt-btn">encrypt</button>
-          <button type="button" id="clear-btn">clear</button>
+          <button type="submit" class="label" id="encrypt-btn">encrypt</button>
+          <button type="button" class="label" id="clear-btn">clear</button>
         </form>
       </nav>
     </header>
     <main id="cipher">
-      <label for="original-text" class="header">
+      <label for="original-text" class="label">
         Original text
         <textarea
           id="original-text"
@@ -53,7 +53,7 @@
           form="form"
         ></textarea>
       </label>
-      <label for="encrypted-text" class="header"
+      <label for="encrypted-text" class="label"
         >Encrypted text
         <textarea
           id="encrypted-text"
@@ -62,7 +62,7 @@
           readonly
         ></textarea>
       </label>
-      <button id="copy-btn">copy</button>
+      <button class="label" id="copy-btn">copy</button>
     </main>
     <footer>
       <a target="_blank" href="https://github.com/escowin/caesar-cipher"
