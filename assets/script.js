@@ -2,7 +2,7 @@
 const dom = {
   copyrightEl: document.getElementById("copyright"),
   versionEl: document.getElementById("version"),
-  formEl: document.getElementById("form"),
+  formEl: document.getElementById("cipher-form"),
   input: {
     numEl: document.getElementById("num-input"),
     rangeEl: document.getElementById("num-range"),
