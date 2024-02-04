@@ -131,14 +131,24 @@ function encryptString(num, string) {
     let charCode = string.charCodeAt(i);
     let encryptedCode = charCode + num;
 
-    // Encrypts upper & lower cases separately, adjusting for wrap-arounds as needed
-    if (charCode >= 65 && charCode <= 90) {
-      encryptedCode = encryptedCode > 90 ? encryptedCode - 26 : encryptedCode;
-    } else if (charCode >= 97 && charCode <= 122) {
-      encryptedCode = encryptedCode > 122 ? encryptedCode - 26 : encryptedCode;
-    } else {
-      encryptedCode = charCode;
+    // Encrypts character sets separately, adjusting for wrap-arounds as needed
+    switch (true) {
+      // Uppercase
+      case (charCode >= 65 && charCode <= 90):
+        encryptedCode = encryptedCode > 90 ? encryptedCode - 26 : encryptedCode;
+        break;
+      // Lowercase
+      case (charCode >= 97 && charCode <= 122):
+        encryptedCode = encryptedCode > 122 ? encryptedCode - 26 : encryptedCode;
+        break;
+      // Symbols & numerals
+      case (charCode >= 32 && charCode <= 64):
+        encryptedCode = encryptedCode > 64 ? encryptedCode - 33 : encryptedCode;
+        break;
+      default:
+        encryptedCode = charCode;
     }
+
     result += String.fromCharCode(encryptedCode);
   }
 
