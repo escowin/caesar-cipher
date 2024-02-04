@@ -91,6 +91,7 @@ function formSubmitHandler(e) {
 function clearOriginalText(e) {
   e.preventDefault();
   dom.input.originalTextEl.value = "";
+  dom.input.encryptedTextEl.value = "";
 }
 
 // Encrypts string by shifting each alphabetic character ASCII value to the right by `num` value
