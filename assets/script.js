@@ -134,16 +134,25 @@ function encryptString(num, string) {
     // Encrypts character sets separately, adjusting for wrap-arounds as needed
     switch (true) {
       // Uppercase
-      case (charCode >= 65 && charCode <= 90):
+      case charCode >= 65 && charCode <= 90:
         encryptedCode = encryptedCode > 90 ? encryptedCode - 26 : encryptedCode;
         break;
       // Lowercase
-      case (charCode >= 97 && charCode <= 122):
-        encryptedCode = encryptedCode > 122 ? encryptedCode - 26 : encryptedCode;
+      case charCode >= 97 && charCode <= 122:
+        encryptedCode =
+          encryptedCode > 122 ? encryptedCode - 26 : encryptedCode;
         break;
-      // Symbols & numerals
-      case (charCode >= 32 && charCode <= 64):
+      // Numerals and Symbols A
+      case charCode >= 32 && charCode <= 64:
         encryptedCode = encryptedCode > 64 ? encryptedCode - 33 : encryptedCode;
+        break;
+      // Symbols B
+      case charCode >= 91 && charCode <= 96:
+        encryptedCode = encryptedCode > 96 ? encryptedCode - 6 : encryptedCode;
+        break;
+      // Symbols C
+      case charCode >= 123 && charCode <= 126:
+        encryptedCode = encryptedCode > 126 ? encryptedCode -  4: encryptedCode;
         break;
       default:
         encryptedCode = charCode;
