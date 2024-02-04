@@ -183,7 +183,6 @@ label {
     flex-direction: column;
     font-weight: bold;
     font-variant: small-caps;
-
 }
 
 /* Inputs */
@@ -269,12 +268,12 @@ textarea {
 }
 
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
     body {
         gap: 2rem;
     }
 
-    /* header */
+    /* header sibiling elements */
     #cipher-form {
         grid-template-rows: 1fr max-content;
         height: 100%;
@@ -293,11 +292,18 @@ textarea {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr max-content;
-        padding-top: 3.25rem;
-        gap: 3.25rem;
+        gap: 1rem 3rem;
+
+        & label {
+            height: 100%;
+            & textarea {
+                flex-grow: 1;
+            }
+        }
 
         & #copy-btn {
-            align-self: flex-end;
+            grid-column:  2 / -1;
+            justify-self: flex-end;
         }
     }
 
