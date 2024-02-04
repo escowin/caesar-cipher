@@ -29,6 +29,23 @@ function init() {
   formEl.addEventListener("submit", (e) => formSubmitHandler(e));
   btn.clear.addEventListener("click", (e) => clearOriginalText(e));
   btn.copy.addEventListener("click", copyEncryptedText);
+
+  // Encrypted legend lights & dims when user interacts with range & num inputs
+  input.numEl.addEventListener("mousedown", lightupLegend);
+  input.numEl.addEventListener("touchstart", lightupLegend);
+  input.numEl.addEventListener("focus", lightupLegend);
+  
+  input.rangeEl.addEventListener("mousedown", lightupLegend);
+  input.rangeEl.addEventListener("touchstart", lightupLegend);
+  input.rangeEl.addEventListener("focus", lightupLegend);
+
+  input.numEl.addEventListener("mouseup", dimLegend);
+  input.numEl.addEventListener("touchend", dimLegend);
+  input.numEl.addEventListener("blur", dimLegend);
+
+  input.rangeEl.addEventListener("mouseup", dimLegend);
+  input.rangeEl.addEventListener("touchend", dimLegend);
+  input.rangeEl.addEventListener("blur", dimLegend);
 }
 
 // displays app details in the console & browser
@@ -75,6 +92,14 @@ function syncedValues(e) {
   displayLegend();
 }
 
+function lightupLegend() {
+  dom.alphabetShiftedEl.style.backgroundColor = "var(--light)";
+}
+
+function dimLegend() {
+  dom.alphabetShiftedEl.style.backgroundColor = "var(--bg-unfocus)";
+}
+
 // Captures user form-input
 function formSubmitHandler(e) {
   e.preventDefault();
@@ -91,7 +116,6 @@ function formSubmitHandler(e) {
 function clearOriginalText(e) {
   e.preventDefault();
   dom.input.originalTextEl.value = "";
-  dom.input.encryptedTextEl.value = "";
 }
 
 // Encrypts string by shifting each alphabetic character ASCII value to the right by `num` value

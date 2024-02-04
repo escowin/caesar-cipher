@@ -75,6 +75,7 @@ nav {
 
     & #alphabet-shifted {
         color: var(--red);
+        transition: 1s background-color;
     }
 
     & #cipher-form {
