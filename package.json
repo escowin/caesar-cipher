@@ -1,9 +1,12 @@
 {
   "name": "caesar-cipher",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A substitution cipher that shifts each letter in the plaintext by a user-defined number of positions down the alphabet.",
   "main": "index.js",
   "scripts": {
+    "webpack": "webpack --watch",
+    "build": "webpack",
+    "start:dev": "webpack-dev-server",
     "test": "jest"
   },
   "repository": {

@@ -1,3 +1,4 @@
+import "../css/style.css"
 const { encryptString } = require("./encryption");
 
 // DOM variables
@@ -55,7 +56,7 @@ function credits({ copyrightEl, versionEl }) {
   const info = {
     github: `https://github.com/escowin/`,
     app: "caesar-cipher",
-    v: "1.0.5",
+    v: "2.0.0",
     copyright: `\u00a9 ${date} Edwin M. Escobar`,
     link: () => info.github + info.app,
   };
