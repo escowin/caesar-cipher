@@ -1,4 +1,4 @@
-const { encryptString } = require("../src/encryption")
+const { encryptString } = require("../src/js/encryption")
 
 describe('encryptString function', () => {
     it('should encrypt a string correctly', () => {

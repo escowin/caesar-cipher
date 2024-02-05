@@ -1,6 +1,5 @@
 const { encryptString } = require("./encryption");
 
-// Script handles Web API-related functions
 // DOM variables
 const dom = {
   copyrightEl: document.getElementById("copyright"),
