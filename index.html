@@ -3,9 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#351b0d" />
+    <meta
+      name="description"
+      content="A substitution cipher PWA that shifts each letter in the plaintext by a user-defined number of positions down the alphabet."
+    />
+    <!-- <link rel="manifest" href="./dist/manifest.json" /> -->
     <title>cæsar cipher</title>
-    <link rel="stylesheet" href="./assets/style.css" />
-    <script defer src="./assets/script.js"></script>
+    <link rel="stylesheet" href="./assets/src/style.css" />
+    <script defer src="./assets/src/script.js"></script>
+    <!-- <script defer src="./dist/app.bundle.js"></script>
+    <script defer>
+      (function () {
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker
+            .register("./service-worker.js")
+            .then(() => console.log("registered service worker"))
+            .catch((error) =>
+              console.log("service worker registration failed")
+            );
+        }
+      })();
+    </script> -->
   </head>
   <body>
     <header>
