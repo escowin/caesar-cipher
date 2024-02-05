@@ -34,7 +34,7 @@ module.exports = {
       description:
         "A substitution cipher PWA that shifts each letter in the plaintext by a user-defined number of positions down the alphabet.",
       start_url: "../index.html",
-      background_color: "#351b0d",
+      background_color: "#4e463d",
       theme_color: "#faf2d9",
       fingerprints: false,
       inject: false,
