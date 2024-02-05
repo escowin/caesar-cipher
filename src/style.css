@@ -18,7 +18,7 @@
     padding: 0;
 }
 
-/* I. Base */
+/* II. Base */
 
 body {
     background-color: var(--bg);
@@ -31,7 +31,7 @@ body {
     height: 100vh;
 }
 
-/* II. Semantic divisions */
+/* III. Semantic divisions */
 footer,
 header,
 main {
@@ -41,8 +41,8 @@ main {
     width: 100%;
 }
 
-/* III. Nested division specificity */
-/* - Header */
+/* IV. Nested division specificity */
+/* Header */
 h1 {
     font-variant: small-caps;
     padding: .5rem;
@@ -97,7 +97,7 @@ nav {
     }
 }
 
-/* - Main */
+/* Main */
 main {
     flex-grow: 2;
     gap: 1rem;
@@ -126,7 +126,7 @@ main {
     }
 }
 
-/* IV. Interactive */
+/* V. Interactive */
 /* Links */
 a {
     color: var(--red);
@@ -203,7 +203,7 @@ label {
     font-variant: small-caps;
 }
 
-/* Inputs */
+/* Input fields */
 .input {
     transition: var(--tr-3), 1s text-shadow, 1s outline;
 
