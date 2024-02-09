@@ -1,6 +1,6 @@
 // service worker enables offline functionality
 const APP_PREFIX = "CaesarCipher-";
-const VERSION = "2.0.0";
+const VERSION = "2.0.1";
 const CACHE_NAME = APP_PREFIX + VERSION;
 
 // cache of essential files

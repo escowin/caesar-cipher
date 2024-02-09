@@ -56,7 +56,7 @@ function credits({ copyrightEl, versionEl }) {
   const info = {
     github: `https://github.com/escowin/`,
     app: "caesar-cipher",
-    v: "2.0.0",
+    v: "2.0.1",
     copyright: `\u00a9 ${date} Edwin M. Escobar`,
     link: () => info.github + info.app,
   };

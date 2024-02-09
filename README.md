@@ -9,7 +9,6 @@ I wrote this because I wanted to combine my interests in encryption history, com
 
 Knowing that character strings can be represented by ASCII values, I applied basic programming principles to generate an encrypted string by capturing user input. Leveraged CSS pseudo classes with color theory to visually obscure un-focused elements.
 
-
 Plans include expanding character sets to encompass numbers, symbols, accented letters, and non-Latin scripts for encryption while utilizing Progressive Web App features & IndexedDB for offline functionality & persistent memory storage.
 
 ## Table of Contents

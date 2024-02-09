@@ -2,13 +2,14 @@
 
 /* I. Palette */
 :root {
-    --bg: rgb(78, 70, 61);
+    --bg: rgb(27, 27, 38);
     --bg-unfocus: rgb(150, 119, 102);
     --dark: rgb(53, 27, 13);
     --light: rgb(250, 242, 217);
     --red: rgb(247, 83, 83);
+    --btn: rgb(36, 87, 138);
     --tr-3: 1s color, 1s background-color, 1s box-shadow;
-    --spread: .25rem .25rem .5rem;
+    --spread: .05rem .05rem .5rem;
     --corners: .5rem;
 }
 
@@ -130,7 +131,7 @@ main {
 /* Links */
 a {
     color: var(--red);
-    font-weight: bold;
+    font-weight: lighter;
     border-radius: var(--corners);
     padding: .5rem 1rem;
     margin: 1rem 0;
@@ -151,8 +152,8 @@ a {
     }
 
     &:hover {
-        background-color: var(--dark);
-        box-shadow: var(--spread) var(--dark);
+        background-color: var(--btn);
+        box-shadow: var(--spread) var(--light);
     }
 
 }
@@ -170,17 +171,22 @@ button,
 button {
     padding: .3rem .75rem;
     font-variant: small-caps;
-    background-color: var(--dark);
+    background-color: var(--btn);
     box-shadow: var(--spread) var(--dark);
 
-    &:active {
+    &:active,
+    &:focus,
+    &:hover {
         color: var(--light);
     }
 
-    &:focus {
-        color: var(--light);
+    &:focus,
+    &:hover {
         background-color: var(--red);
         box-shadow: var(--spread) var(--light);
+    }
+
+    &:focus {
         outline: 2px solid var(--light);
     }
 }
@@ -190,6 +196,7 @@ button {
     color: var(--red);
     text-shadow: var(--spread) var(--dark);
     transition: 1s color;
+    font-weight: lighter;
 
     &:hover {
         color: var(--light);
@@ -199,7 +206,6 @@ button {
 label {
     display: flex;
     flex-direction: column;
-    font-weight: bold;
     font-variant: small-caps;
 }
 
@@ -225,11 +231,12 @@ input {
 
 input[type="number"] {
     padding: .25rem;
-    width: 2.5rem;
+    width: 3rem;
     background-color: var(--bg-unfocus);
     box-shadow: inset var(--spread) var(--dark);
     text-align: center;
     text-shadow: var(--tr-3) var(--dark);
+    font-size: 1.25rem;
 
     &:focus {
         color: var(--red);
