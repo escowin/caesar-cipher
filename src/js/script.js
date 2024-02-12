@@ -1,4 +1,4 @@
-// import "../css/style.css"
+import "../css/style.css"
 const { encryptString } = require("./encryption");
 
 // DOM variables
