@@ -1,4 +1,4 @@
-import "../css/style.css"
+// import "../css/style.css"
 const { encryptString } = require("./encryption");
 
 // DOM variables
@@ -63,7 +63,6 @@ function credits({ copyrightEl, versionEl }) {
 
   console.log(`${info.app} v${info.v}\n${info.copyright}\n${info.link()}`);
   copyrightEl.innerText = date;
-  versionEl.innerText = `v${info.v}`;
 }
 
 // Syncs range & num input values

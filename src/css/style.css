@@ -2,14 +2,14 @@
 
 /* I. Palette */
 :root {
-    --bg: rgb(27, 27, 38);
-    --bg-unfocus: rgb(150, 119, 102);
-    --dark: rgb(53, 27, 13);
-    --light: rgb(250, 242, 217);
-    --red: rgb(247, 83, 83);
-    --btn: rgb(36, 87, 138);
+    --bg: rgb(137, 118, 82);
+    --bg-unfocus: rgb(87, 71, 50);
+    --dark: rgb(28, 11, 2);
+    --light: rgb(251, 236, 192);
+    --yellow: rgb(255, 204, 122);
+    --btn: #8a2424;
     --tr-3: 1s color, 1s background-color, 1s box-shadow;
-    --spread: .05rem .05rem .5rem;
+    --spread: .05rem .05rem .15rem;
     --corners: .5rem;
 }
 
@@ -80,7 +80,7 @@ nav {
     }
 
     & #encrypted-legend {
-        color: var(--red);
+        color: var(--yellow);
         transition: 1s background-color;
     }
 
@@ -130,7 +130,7 @@ main {
 /* V. Interactive */
 /* Links */
 a {
-    color: var(--red);
+    color: var(--yellow);
     font-weight: lighter;
     border-radius: var(--corners);
     padding: .5rem 1rem;
@@ -142,18 +142,19 @@ a {
 
     &:focus,
     &:hover {
-        color: var(--light);
+        box-shadow: var(--spread) var(--dark);
     }
 
     &:focus {
         outline: 2px solid var(--light);
-        background-color: var(--red);
+        background-color: var(--yellow);
         box-shadow: var(--spread) var(--light);
+        color: var(--btn);
     }
 
     &:hover {
         background-color: var(--btn);
-        box-shadow: var(--spread) var(--light);
+        color: var(--light);
     }
 
 }
@@ -173,16 +174,17 @@ button {
     font-variant: small-caps;
     background-color: var(--btn);
     box-shadow: var(--spread) var(--dark);
+    transition: var(--tr-3), 1s outline;
 
     &:active,
     &:focus,
     &:hover {
-        color: var(--light);
+        color: var(--btn);
     }
 
     &:focus,
     &:hover {
-        background-color: var(--red);
+        background-color: var(--yellow);
         box-shadow: var(--spread) var(--light);
     }
 
@@ -193,7 +195,7 @@ button {
 
 /* Labels */
 .label {
-    color: var(--red);
+    color: var(--yellow);
     text-shadow: var(--spread) var(--dark);
     transition: 1s color;
     font-weight: lighter;
@@ -224,7 +226,7 @@ label {
 }
 
 input {
-    color: var(--red);
+    color: var(--yellow);
     background-color: var(--dark);
     box-shadow: var(--spread) var(--dark);
 }
@@ -239,7 +241,7 @@ input[type="number"] {
     font-size: 1.25rem;
 
     &:focus {
-        color: var(--red);
+        color: var(--yellow);
     }
 }
 
@@ -260,7 +262,7 @@ input[type="range"] {
         width: var(--size);
         height: var(--size);
         border-radius: var(--corners);
-        background: var(--red);
+        background: var(--yellow);
         box-shadow: var(--spread) var(--dark);
         outline: none;
         padding: .5rem;
